@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -23,8 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const uri =
-  'mongodb+srv://trade2sale1:Cegthcnfh1@cluster0.ibtcjut.mongodb.net/';
+const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {
