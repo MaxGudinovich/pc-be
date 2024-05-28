@@ -23,7 +23,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const uri = 'mongodb://127.0.0.1:27017/usercards';
+const uri =
+  'mongodb+srv://trade2sale1:Cegthcnfh1@cluster0.ibtcjut.mongodb.net/';
 
 const client = new MongoClient(uri, {
   serverApi: {
