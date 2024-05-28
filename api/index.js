@@ -73,7 +73,7 @@ async function run() {
       }
     });
 
-    app.get('/api/users', async (req, res) => {
+    app.get('/users', async (req, res) => {
       try {
         const db = client.db('test');
         const collection = db.collection('users');
