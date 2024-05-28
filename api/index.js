@@ -77,7 +77,7 @@ async function run() {
 
     app.get('/users', async (req, res) => {
       try {
-        const db = client.db('usercards');
+        const db = client.db('test');
         const collection = db.collection('users');
 
         const users = await collection.find().toArray();
@@ -89,7 +89,7 @@ async function run() {
 
     app.get('/users/:id', async (req, res) => {
       try {
-        const db = client.db('usercards');
+        const db = client.db('test');
         const collection = db.collection('users');
         const userId = req.params.id;
 
