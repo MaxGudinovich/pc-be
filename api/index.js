@@ -34,13 +34,15 @@ const client = new MongoClient(uri, {
     strict: true,
     deprecationErrors: true,
   },
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
 });
 
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 30000,
   })
   .then(() => {
     console.log('Mongoose connected to ' + uri);
@@ -77,6 +79,7 @@ async function run() {
 
     app.get('/users', async (req, res) => {
       try {
+        console.log('Received GET /users request');
         const db = client.db('test');
         const collection = db.collection('users');
 
