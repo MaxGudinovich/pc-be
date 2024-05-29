@@ -26,17 +26,14 @@ const upload = multer({ storage });
 
 const uri = process.env.MONGODB_URI;
 
-console.log(uri);
-
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   },
-  serverSelectionTimeoutMS: 60000,
   connectTimeoutMS: 30000,
-  socketTimeoutMS: 45000,
+  socketTimeoutMS: 30000,
 });
 
 mongoose.set('strictQuery', false);
@@ -46,7 +43,7 @@ async function connectToMongoDB() {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 30000,
     });
     console.log('Mongoose connected to ' + uri);
   } catch (err) {
