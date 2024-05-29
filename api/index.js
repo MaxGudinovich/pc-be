@@ -46,7 +46,7 @@ async function connectToMongoDB() {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 60000,
+      serverSelectionTimeoutMS: 5000,
     });
     console.log('Mongoose connected to ' + uri);
   } catch (err) {
