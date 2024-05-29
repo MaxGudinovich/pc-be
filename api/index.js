@@ -46,12 +46,12 @@ async function connectToMongoDB() {
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 60000, // увеличено время ожидания выбора сервера
+      serverSelectionTimeoutMS: 60000,
     });
     console.log('Mongoose connected to ' + uri);
   } catch (err) {
     console.error('Mongoose connection error:', err);
-    setTimeout(connectToMongoDB, 5000); // повторная попытка подключения через 5 секунд
+    setTimeout(connectToMongoDB, 5000);
   }
 }
 
@@ -126,6 +126,7 @@ async function run() {
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
     setTimeout(run, 5000);
+    setTimeout(connectToMongoDB, 5000);
   }
 }
 
