@@ -34,22 +34,28 @@ const client = new MongoClient(uri, {
     strict: true,
     deprecationErrors: true,
   },
+  serverSelectionTimeoutMS: 60000,
   connectTimeoutMS: 30000,
   socketTimeoutMS: 45000,
 });
 
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000,
-  })
-  .then(() => {
+mongoose.set('strictQuery', false);
+
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 60000, // увеличено время ожидания выбора сервера
+    });
     console.log('Mongoose connected to ' + uri);
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error('Mongoose connection error:', err);
-  });
+    setTimeout(connectToMongoDB, 5000); // повторная попытка подключения через 5 секунд
+  }
+}
+
+connectToMongoDB();
 
 async function run() {
   try {
@@ -119,6 +125,7 @@ async function run() {
     });
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
+    setTimeout(run, 5000);
   }
 }
 
