@@ -139,5 +139,3 @@ module.exports = app;
       res.status(400).send(error.message);
     }
   }); */
-
-/* 'mongodb+srv://trade2sale1:<password>@cluster0.ibtcjut.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; */
